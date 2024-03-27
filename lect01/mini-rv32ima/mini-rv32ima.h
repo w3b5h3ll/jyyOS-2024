@@ -81,6 +81,8 @@ struct CPUState {
     uint32_t mem_offset, mem_size;
 };
 
+// 状态机，risc-v模拟器
+// 操作系统，软硬件之间的中间层
 static inline int32_t rv32ima_step(struct CPUState *state, uint32_t elapsedUs) {
     #define CSR(x) (state->csrs[x])
     #define REG(x) (state->regs[x])
