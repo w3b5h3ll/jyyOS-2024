@@ -20,10 +20,12 @@ struct Frame {
 typedef struct Frame Frame;
 
 int hanoi(int n, char from, char to, char via) {
+    // Frame数组
     Frame stk[64];
     Frame *top = stk - 1;
 
     // Function call: push a new frame (PC=0) onto the stack
+    // __VA_ARGS__，表示宏的可变参数列表
     #define call(...) ({ *(++top) = (Frame){.pc = 0, __VA_ARGS__}; })
     
     // Function return: pop the top-most frame

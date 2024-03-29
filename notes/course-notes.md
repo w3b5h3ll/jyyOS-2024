@@ -67,12 +67,62 @@ https://sourceware.org/gdb/current/onlinedocs/gdb.html/
 - TUI
 - ...
 
+### GDB Text User Interface TUI
+> The GDB Text User Interface (TUI) is a terminal interface which uses the curses library to show the source file, the assembly output, the program registers and GDB commands in separate text windows
+
+TUI
+- layout src
+- layout asm
+- ...
+
+
+
+
+
+
+
 toybox busybox: commands source code
 
 Tasks:
 - strace mini program
-- 扩展非递归汉诺塔问题至f与g两个函数互相调用
+- <font color="red">扩展非递归汉诺塔问题至f与g两个函数互相调用</font>
 - strace更多的命令，如ls pwd，了解部分系统的作用
+
+```bash
+$ strace -o trace.log ls ./|awk -F'(' '{print $1}' trace.log | sort | uniq
++++ exited with 0 +++
+access
+arch_prctl
+brk
+close
+execve
+exit_group
+futex
+getdents64
+getrandom
+ioctl
+mmap
+mprotect
+munmap
+newfstatat
+openat
+pread64
+prlimit64
+read
+rseq
+set_robust_list
+set_tid_address
+statfs
+statx
+write
+```
+
+### 汉诺塔问题
+
+递归vs非递归
+
+
+
 
 程序自己无法停下来
 - 只能借助操作系统
@@ -87,3 +137,16 @@ Tasks:
   - 访问操作系统提供的进程对象，M1-pstree
 - 杀毒软件
   - 静态（read），动态（ptrace）
+
+### 状态机
+- 严格数学定义
+  - 状态
+    - [StackFrame, StackFrame, ...] + 全局变量
+
+  - 初始状态
+    - 仅有一个StarckFrame(main, argc, argv, PC=0)
+    - 全局变量为初始值
+
+  - 状态迁移
+    - 执行frames[-1]，即top StackFrame.PC处的语句
+

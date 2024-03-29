@@ -19,7 +19,7 @@
 # 1 "/usr/include/x86_64-linux-gnu/bits/syscall.h" 1 3 4
 # 30 "/usr/include/x86_64-linux-gnu/sys/syscall.h" 2 3 4
 # 2 "minimal.S" 2
-# 19 "minimal.S"
+# 31 "minimal.S"
 .globl _start
 _start:
     movq $1, %rax; movq $1, %rdi; movq $addr1, %rsi; movq $addr2 - addr1, %rdx; syscall

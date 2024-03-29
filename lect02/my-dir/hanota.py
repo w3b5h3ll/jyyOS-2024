@@ -17,6 +17,10 @@ class Solution:
 
     def move(self, n, A, B, C):
         if n == 1:
+            print(A)
+            print(B)
+            print(C)
+            print('--------')
             C.append(A[-1])
             A.pop()
             return
@@ -31,12 +35,12 @@ class Solution:
 
 
 if __name__ == '__main__':
-    A = [random.randint(1, 100) for _ in range(28)]
+    A = [random.randint(1, 100) for _ in range(4)]
     B = []
     C = []
     solution = Solution()
-    print(A)
+    # print(A)
     start = int(time.time())
     solution.hanota(A, B, C)
-    print(C)
+    # print(C)
     print(int(time.time()) - start)

@@ -6,6 +6,18 @@
 //     Return value: RAX
 // See also: syscall(2) syscalls(2)
 
+/* define宏定义中的操作符
+"#": 字符串化
+- 例如#define example1(instr) #instr
+- string str=example1(abc) >> string str="abc"
+
+"##": 符号连接
+- #define exampleNum(n) num##num
+- int num=exampleNum(9) >> int num=num9
+
+
+*/
+
 #define syscall3(id, a1, a2, a3) \
     movq $SYS_##id, %rax; \
     movq $a1, %rdi; \
