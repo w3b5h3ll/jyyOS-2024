@@ -150,3 +150,108 @@ write
   - 状态迁移
     - 执行frames[-1]，即top StackFrame.PC处的语句
 
+# Lecture03 硬件视角的操作系统
+- 什么是计算机（硬件）系统
+- 约定
+
+状态机模型，不同层次
+- C代码，高级语言
+  - SimpleC & GDB(TUI src)
+- 汇编
+  - GDB(TUI asm)
+- 处理器
+  - mini-rv32ima; ICS PA
+- 数字电路
+  - Logisim
+
+
+## 计算机系统的状态机模型
+
+状态
+- 内存、寄存器的数值
+- 外部世界
+  - 设备上的寄存器、I/O、memory-mapped
+  - Interrupt/Reset Line
+  - 客观存在，但计算机系统不能直接访问
+
+初始状态
+- 由系统设计者规定 CPU Reset
+
+状态迁移
+- 从PC取指令执行
+- 响应中断 if(intr) goto vec;
+- 输入输出
+
+
+Reset电路：热启动
+操作系统如何感知外部世界
+
+CPU Reset: 其他体系结构
+
+RISC-V:
+- PC无规定
+- 寄存器除了x0，全部undefined
+- CSR 控制状态寄存器
+  - 省电路
+  - 
+
+
+软件控制一切
+
+CPU RESET >> Firmware厂商将代码规定在ROM中
+
+## Firmware
+
+加载Master Boot Record MBR
+第一个可启动磁盘前512字节进行加载
+
+现在有了UEFI标准，可以加载任意GPT分区表上的FAT分区中存储的应用
+
+
+Firmware BIOS系统
+- 计算机系统配置：CPU电压、接口开关
+- 加载操作系统
+https://www.qemu.org/docs/master/system/invocation.html#hxtool-8
+
+DOS时代，BIOS中断，直接调用BIOS代码
+
+CPU Reset后初始化硬件；对接操作系统Boot Loader
+
+Leagcy BIOS >> UEFI
+
+Leagcy BIOS
+- IBM PC
+- 兼容机百花齐放，AMI Phoenix BIOS
+
+
+UEFI Unified Extensible Firmware Interface
+
+
+
+1998:
+
+Firmware通常是只读的
+但是 Firmware也需要更新
+
+Intel 430TX芯片组允许写入PROM
+- 某些主板有写保护跳线
+
+CIH病毒
+- 可以破坏硬件
+- cih-1.4.asm
+https://github.com/onx/CIH/blob/master/cih-1.4.asm
+
+
+1983:
+Firmware BIOS加载前512字节到0x7c00
+- 如果最后是 0x55 0xAA
+- 01010101 10101010
+
+加载过程 
+
+我们可以写446=512 -2(55 aa) -64(分区表)
+
+Grub
+- 扫描磁盘，找到ELF文件头
+- 该ELF文件是Grub，弹窗
+- 加载Linux Kernel

@@ -59,3 +59,9 @@ procfs
 
 ## 思考题
 使用Windows的任务管理器“画图”
+
+git远程提交时如下报错
+ 1018  2024-03-29 17:06:54 git pull origin master
+ 1019  2024-03-29 17:07:48 git pull --rebase origin master
+
+ 
